@@ -1,0 +1,15 @@
+We can test that our development environment is configured correctly by creating a simple Express application. We’ll grab the ten-line example from Express's documentation and drop it in a new file called index.js.
+
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('Hello World!');
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+We can then try running our new Express application with the command node index.js. If you open http://localhost:3000 in your browser and you should see the “Hello World!” response.
+
+Note: If you’re using a virtual machine for your development environment, like vagrant, you
