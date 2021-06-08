@@ -1,0 +1,26 @@
+{
+  "name": "on-rails",
+  "version": "1.0.0",
+  "description": "A simple node project to document my node journey",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MickeyDLuffy/node-on-rails.git"
+  },
+  "keywords": [
+    "node",
+    "start"
+  ],
+  "author": "Mickey D Luffy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MickeyDLuffy/node-on-rails/issues"
+  },
+  "homepage": "https://github.com/MickeyDLuffy/node-on-rails#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
