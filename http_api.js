@@ -1,5 +1,5 @@
 const http = require('http');
-
+const fs = require('fs');
 http.createServer((request, response) => {
   if(request.url === '/technology') {
       response.write(`<!DOCTYPE html>
@@ -22,8 +22,12 @@ http.createServer((request, response) => {
       </html>`);
       response.end;
   } else if(request.url == '/partner') {
-    response.write(``);
-    response.end;
+      console.log('in partnetr')
+    fs.readFile(__dirname + '/user.json', (err, data) => {
+        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.end(data);
+    });
+    
   } else {
       response.write('Invalid request')
       response.end();
