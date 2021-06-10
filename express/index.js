@@ -5,7 +5,7 @@ const joi = require('joi');
 const app = express();
 
 app.use(express.json());
-
+app.use(express.static('public')) // middleware for serving static files
 const courses = [
     {id: 1, name: 'Angular'},
     {id: 2, name: 'React'},
@@ -13,6 +13,22 @@ const courses = [
     {id: 4, name: 'Knockout'},
     {id: 5, name: 'Express'}
 ];
+
+
+const requireJsonContent = () => {
+    return (req, res, next) => {
+        console.log(req.headers)
+        if( req.headers['content-type'] !== 'application/json') {
+            return res.status(400).send({message: 'Request must have content-type application/json'});
+        } 
+
+     next();
+    }
+}
+
+app.use(requireJsonContent());
+
+
 
 app.get('/api/courses', (req, res) => {
      res.send(courses);
@@ -59,7 +75,7 @@ app.delete('/api/courses/:id', (req, res) => {
 })
 
 
-app.post('/api/courses', (req, res) => {
+app.post('/api/courses',  (req, res) => {
     const {error} = validationCourse(req.body);
 
     if(error) return res.status(404).send({message: error.details[0].message})
@@ -70,9 +86,8 @@ app.post('/api/courses', (req, res) => {
     };
 
     courses.push(newCourse);
-    res.send(newCourse).send({message: 'Succesffully saved'})
+    res.send(newCourse);
 });
-
 
 const validationCourse = (newCourse) => {
    return joi.object({
@@ -86,9 +101,9 @@ const validationCourseId= (newCourse) => {
        id: joi.string().required()
     }).validate(newCourse);
  }
-app.get('/', (req, res) => {
-     res.send('Sending a response to')
-});
+// app.get('/', (req, res) => {
+//      res.send('Sending a response to')
+// });
 
 app.get('/user', (req, res) => {
     res.json([{name: 'Dluffy', age: 10}]);
